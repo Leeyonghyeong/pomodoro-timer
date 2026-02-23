@@ -31,6 +31,7 @@ jobs:
 
     - name: Create Package (Mac)
       if: matrix.os == 'macos-latest'
+      shell: bash
       run: |
         jpackage --name FocusLoop \
           --input target/ \
@@ -43,6 +44,7 @@ jobs:
 
     - name: Create Package (Windows)
       if: matrix.os == 'windows-latest'
+      shell: bash
       run: |
         jpackage --name FocusLoop \
           --input target/ \
