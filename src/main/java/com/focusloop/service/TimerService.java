@@ -75,24 +75,22 @@ public class TimerService {
         if (state.get() == TimerState.FOCUS_RUNNING) {
             storageService.updateDailyStatSeconds(focusMinutes, false); // Record focus time
             notificationService.showNotification("집중 종료!", "휴식 시간입니다.");
-            remainingSeconds.set(breakMinutes);
-            isFocusPhase = false; // Next phase is break
             if (autoStartNext) {
-                state.set(TimerState.BREAK_RUNNING);
-                runTimer();
+                startBreakPhase();
             } else {
+                remainingSeconds.set(breakMinutes);
+                isFocusPhase = false;
                 state.set(TimerState.PAUSED);
             }
         } else if (state.get() == TimerState.BREAK_RUNNING) {
             if (currentCycle.get() < totalCycles.get()) {
                 notificationService.showNotification("휴식 종료!", "다시 시작할 시간입니다.");
                 currentCycle.set(currentCycle.get() + 1);
-                remainingSeconds.set(focusMinutes);
-                isFocusPhase = true; // Next phase is focus
                 if (autoStartNext) {
-                    state.set(TimerState.FOCUS_RUNNING);
-                    runTimer();
+                    startFocusPhase();
                 } else {
+                    remainingSeconds.set(focusMinutes);
+                    isFocusPhase = true;
                     state.set(TimerState.PAUSED);
                 }
             } else {

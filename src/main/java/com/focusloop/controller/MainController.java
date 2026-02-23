@@ -91,6 +91,10 @@ public class MainController {
         timerService.currentCycleProperty().addListener((obs, oldVal, newVal) -> {
             updateCycleDisplay(newVal.intValue(), timerService.totalCyclesProperty().get());
         });
+
+        timerService.totalCyclesProperty().addListener((obs, oldVal, newVal) -> {
+            updateCycleDisplay(timerService.currentCycleProperty().get(), newVal.intValue());
+        });
     }
 
     private void setupSpinners() {
@@ -121,6 +125,7 @@ public class MainController {
         int cycles = cyclesSpinner.getValue();
 
         timerService.start(focus, breakTime, cycles);
+        updateCycleDisplay(1, cycles); // Explicitly update UI immediately
         setupView.setVisible(false);
         timerView.setVisible(true);
     }

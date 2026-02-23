@@ -47,11 +47,11 @@
 
         <!-- Timer View -->
         <VBox fx:id="timerView" spacing="30" alignment="CENTER" visible="false">
-            <Label fx:id="statusBadge" text="FOCUS" styleClass="badge-focus"/>
+            <Label fx:id="statusBadge" text="집중 중" styleClass="badge-focus"/>
             
             <Text fx:id="timerText" text="00:00" styleClass="timer-text"/>
             
-            <Label fx:id="cycleLabel" text="Cycle 1 of 4" styleClass="text-secondary"/>
+            <Label fx:id="cycleLabel" text="1 / 4 세트" styleClass="text-secondary"/>
             
             <HBox spacing="15" alignment="CENTER">
                 <Button fx:id="pauseButton" text="일시정지" styleClass="button-secondary" prefWidth="100"/>
